@@ -59,10 +59,10 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    // public function company()
-    // {
-    //     return $this->hasMany('App\Models\Company', 'user_id');
-    // }
+    public function company()
+    {
+        return $this->belongsToMany(Company::class);
+    }
 
     
 }

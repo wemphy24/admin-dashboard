@@ -30,4 +30,6 @@ class Role extends Model
     {
         $this->hasMany('App\Models\Employee', 'role_id');
     }
+
+    //php artisan tinker 
 }

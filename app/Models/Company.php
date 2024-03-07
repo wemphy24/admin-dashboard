@@ -14,13 +14,12 @@ class Company extends Model
     protected $fillable = [
         'name',
         'logo',
-        // 'user_id',
     ];
 
-    // public function user()
-    // {
-    //     return $this->belongsTo('App\Models\User', 'user_id', 'id');
-    // }
+    public function user()
+    {
+        return $this->belongsToMany(User::class);
+    }
 
     public function team()
     {
