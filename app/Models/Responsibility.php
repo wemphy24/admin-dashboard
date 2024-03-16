@@ -12,6 +12,7 @@ class Responsibility extends Model
     public $table = 'responsibilities';
 
     protected $fillable = [
+        'name',
         'role_id',
     ];
 

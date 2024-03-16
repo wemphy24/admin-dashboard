@@ -24,8 +24,8 @@ class CompanyController extends Controller
             $query->where('user_id', Auth::id());
         });
 
-        // get single data
         // kiwkiw.com/api/company?id=1
+        // get single data
         if($id) {
             $company = $companyQuery->find($id);
 
@@ -99,7 +99,7 @@ class CompanyController extends Controller
             // update company
             $company->update([
                 'name' => $request->name,
-                'logo' => $path,
+                'logo' => isset($path) ? $path : $company->logo,
             ]);
 
             return ResponseFormatter::success($company, 'Company Updated');
