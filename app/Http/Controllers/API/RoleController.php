@@ -18,12 +18,13 @@ class RoleController extends Controller
         $id = $request->input('id');
         $name = $request->input('name');
         $limit = $request->input('limit', 10);
+        $with_responsibility = $request->input('with_responsibility', false);
 
         $roleQuery = Role::query();
 
         // get single data
         if($id) {
-            $role = $roleQuery->find($id);
+            $role = $roleQuery->with('responsibility')->find($id);
 
             if($role) {
                 return ResponseFormatter::success($role, 'Role found');
@@ -32,11 +33,16 @@ class RoleController extends Controller
             return ResponseFormatter::error('Role not found', 404);
         }
 
-        // get multiple data
+        // get multiple data 
         $roles = $roleQuery->where('company_id', $request->company_id);
 
         if ($name) {
             $roles->where('name', 'like', '%' . $name . '%');
+        }
+
+        // get data with responsibility
+        if($with_responsibility) {
+            $roles->with('responsibility');
         }
 
         return ResponseFormatter::success(
