@@ -70,8 +70,6 @@ class EmployeeController extends Controller
             });
         }
 
-
-
         return ResponseFormatter::success(
             $employees->paginate($limit), 'Employee found'
         );

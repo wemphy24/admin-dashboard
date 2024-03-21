@@ -26,11 +26,11 @@ class Employee extends Model
 
     public function team()
     {
-        $this->belongsTo('App\Models\Team', 'team_id', 'id');
+        return $this->belongsTo('App\Models\Team', 'team_id', 'id');
     }
 
     public function role()
     {
-        $this->belongsTo('App\Models\Role', 'role_id', 'id');
+        return $this->belongsTo('App\Models\Role', 'role_id', 'id');
     }
 }
