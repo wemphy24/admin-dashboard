@@ -18,16 +18,16 @@ class ResponseFormatter
             'status' => 'success',
             'message' => null,
         ],
-        'data' => null,
+        'result' => null,
     ];
 
     /**
      * Give success response.
      */
-    public static function success($data = null, $message = null)
+    public static function success($result = null, $message = null)
     {
         self::$response['meta']['message'] = $message;
-        self::$response['data'] = $data;
+        self::$response['result'] = $result;
 
         return response()->json(self::$response, self::$response['meta']['code']);
     }
@@ -35,12 +35,12 @@ class ResponseFormatter
     /**
      * Give error response.
      */
-    public static function error($data = null, $message = null, $code = 400)
+    public static function error($result = null, $message = null, $code = 400)
     {
         self::$response['meta']['status'] = 'error';
         self::$response['meta']['code'] = $code;
         self::$response['meta']['message'] = $message;
-        self::$response['data'] = $data;
+        self::$response['result'] = $result;
 
         return response()->json(self::$response, self::$response['meta']['code']);
     }
