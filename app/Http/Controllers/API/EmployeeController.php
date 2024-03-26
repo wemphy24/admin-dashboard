@@ -24,11 +24,11 @@ class EmployeeController extends Controller
         $company_id = $request->input('company_id');
         $limit = $request->input('limit', 10);
 
-        $employeeQuery = Employee::query();
+        $employeeQuery = Employee::with(['team', 'role']);
 
         // get single data
         if($id) {
-            $employee = $employeeQuery->with(['team', 'role'])->find($id);
+            $employee = $employeeQuery->with(['role', 'team'])->find($id);
 
             if($employee) {
                 return ResponseFormatter::success($employee, 'Employee found');
@@ -56,13 +56,14 @@ class EmployeeController extends Controller
             $employees->where('phone', 'like', '%' . $phone . '%');
         }
 
-        if ($team_id) {
-            $employees->where('team_id', $team_id);
-        }
-
         if ($role_id) {
             $employees->where('role_id', $role_id);
         }
+
+        if ($team_id) {
+            $employees->where('team_id', $team_id);
+        }
+        
 
         if ($company_id) {
             $employees->whereHas('team', function ($query) use ($company_id) {
